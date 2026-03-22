@@ -3,6 +3,14 @@
 A personal GTO (Game Theory Optimal) poker solver for 6-max No-Limit Hold'em.  
 Supports **cash games** and **Poker Now tournaments**.
 
+## Documentation
+
+| Doc | Audience | Contents |
+|---|---|---|
+| [AGENTS.md](AGENTS.md) | AI agents | Project map, data representations, invariants, modification guide |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | Data flow diagrams, algorithms, design decisions, threading model |
+| [docs/GLOSSARY.md](docs/GLOSSARY.md) | Everyone | Poker terms, CS/game theory terms, hand notation |
+
 ## Architecture
 
 ```
@@ -10,22 +18,16 @@ engine/                 C++ core (performance-critical)
 ├── include/poker/
 │   ├── common.h              types, enums, bet sizing config
 │   ├── card.h                Card (int-encoded) and Deck
-│   ├── hand_evaluator.h      5/7-card evaluation (bit manipulation + lookup)
-│   ├── range.h               weighted hand ranges
+│   ├── hand_evaluator.h      5/7-card evaluation (51M evals/sec)
+│   ├── range.h               weighted hand ranges with string parsing
 │   ├── equity_calculator.h   range-vs-range equity, multi-threaded
 │   ├── game_state.h          game rules, legal actions, state transitions
 │   └── strategy.h            abstract strategy interface + CFR+ design
-├── src/
-│   ├── card.cpp
-│   ├── hand_evaluator.cpp
-│   ├── range.cpp
-│   ├── equity_calculator.cpp
-│   ├── game_state.cpp
-│   └── main.cpp              test suite / demo
-└── CMakeLists.txt
+├── src/                      implementations
+└── CMakeLists.txt            build (CMake ≥ 3.16, C++17)
 
 python/                 visualization (planned)
-docs/                   documentation (planned)
+docs/                   documentation
 ```
 
 ## Build
