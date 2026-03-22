@@ -81,8 +81,31 @@ InfoSetKey: string  "P{player}:B{bucket}:{history}"
 cd engine && mkdir -p build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
-./poker_test    # runs all tests, prints results
+
+# Run all 95 tests via CTest
+ctest                              # all tests
+ctest -R Card                      # only Card tests
+ctest -R HandEval                  # only HandEvaluator tests
+ctest --output-on-failure          # show details on failure
+
+# Run a specific test binary with Google Test filters
+./test_hand_eval --gtest_filter="*Flush*"
+
+# Run the demo (not tests)
+./poker_demo
 ```
+
+### Test Files
+
+| File | Module | Tests |
+|---|---|---|
+| `tests/test_card.cpp` | Card, Deck, parseCards, holeCardIndex | 19 tests |
+| `tests/test_hand_eval.cpp` | HandEvaluator (5-card, 7-card, benchmark) | 20 tests |
+| `tests/test_range.cpp` | Range (parsing, weights, dead cards) | 19 tests |
+| `tests/test_equity.cpp` | EquityCalculator (HvH, HvR, RvR, all-in tracker) | 14 tests |
+| `tests/test_game_state.cpp` | GameState (blinds, actions, streets, terminal) | 23 tests |
+
+Test framework: [Google Test v1.14.0](https://github.com/google/googletest) (fetched automatically via CMake FetchContent).
 
 ## Implementation Status
 

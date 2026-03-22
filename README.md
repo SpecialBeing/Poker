@@ -30,14 +30,18 @@ python/                 visualization (planned)
 docs/                   documentation
 ```
 
-## Build
+## Build & Test
 
 ```bash
 cd engine
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
-./poker_test
+
+ctest                       # run all 95 tests
+ctest -R Card               # run only Card tests
+ctest --output-on-failure   # show details on failure
+./poker_demo                # interactive demo
 ```
 
 ## Performance
