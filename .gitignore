@@ -1,15 +1,29 @@
+# C++ build
+build/
+.cache/
+cmake-build-*/
+*.o
+*.a
+*.so
+*.dylib
+compile_commands.json
+
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
 dist/
-build/
 .eggs/
 *.egg
 .env
 .venv/
 venv/
+
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+
+# OS
 .DS_Store
